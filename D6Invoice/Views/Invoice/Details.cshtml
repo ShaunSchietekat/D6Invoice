@@ -1,0 +1,73 @@
+﻿@model D6Invoice.Models.Invoice
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="col-11 mx-auto pt-0">
+    <div class="card">
+        <div class="card-header bg-primary text-uppercase text-white">
+            <h4>View Invoice</h4>
+        </div>
+
+        <form enctype="multipart/form-data" asp-action="Create">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="InvoiceDate" class="control-label"></label>
+                        <input asp-for="InvoiceDate" class="form-control-plaintext" readonly />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="InvoiceNo" class="control-label"></label>
+                        <input asp-for="InvoiceNo" class="form-control-plaintext" readonly />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="DueDate" class="control-label"></label>
+                        <input asp-for="DueDate" class="form-control-plaintext" readonly />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <table id="InvoiceItemsTable" class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Taxed</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.InvoiceItems.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <input asp-for="@Model.InvoiceItems[i].Description" class = "form-control-plaintext" readonly />
+                                    </td>
+                                    <td>
+                                        <input asp-for="@Model.InvoiceItems[i].Amount" class = "form-control-plaintext" readonly />
+                                    </td>
+                                    <td>
+                                        <input asp-for="@Model.InvoiceItems[i].Taxed" class = "form-control-plaintext" readonly />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <input type="hidden" id="hdnLastIndex" value="0" />
+                <div class="col-12 btn-group">
+                    <div class="col-12 form-group text-right">
+                        <a asp-action="Index" class="btn btn-secondary">&nbsp;Back&nbsp;</a>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
